@@ -12,5 +12,8 @@ app.configure(function(){
   app.use(express.cookieParser());
 });
 
+app.get('/', function(req,res){
+	res.render('index', {layout : false});
+});
 app.listen(80);
 
