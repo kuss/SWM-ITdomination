@@ -1,27 +1,27 @@
 var Express = require('express');
-var app = module.exports = Express.createServer();
+var App = module.exports = Express.createServer();
 
 var Util = require('./lib/util');
-var Io = require('socket.io').listen(app);
+var Io = require('socket.io').listen(App);
 var Constant = require('./lib/constant');
 var Game = require('./lib/game');
 var User = require('./lib/user');
 
-app.configure(function(){
-  app.set('views',__dirname + '/views');
-  app.set('view engine','jade');
-  app.use(Express.bodyParser());
-  app.use(Express.methodOverride());
-  app.use(app.router);
-  app.use(Express.static(__dirname + '/public'));
-  app.use(Express.cookieParser());
+App.configure(function(){
+  App.set('views',__dirname + '/views');
+  App.set('view engine','jade');
+  App.use(Express.bodyParser());
+  App.use(Express.methodOverride());
+  App.use(App.router);
+  App.use(Express.static(__dirname + '/public'));
+  App.use(Express.cookieParser());
 });
 
-app.get('/', function(req,res){
+App.get('/', function(req,res){
 	res.render('index', {layout : false});
 });
 
-app.listen(80);
+App.listen(80);
 
 var users = {};
 var games = {};
