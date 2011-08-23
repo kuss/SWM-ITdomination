@@ -18,6 +18,12 @@ var SocketHandlers = [
 		}
 	}
 	,{
+		event : "message"
+		,handler : function(message){
+			addLog(message);
+		}
+	}
+	,{
 		event : "turnEnd"
 		,handler : function(){
 			addLog("Turn End!");
@@ -30,7 +36,11 @@ var SocketHandlers = [
 			console.log(screen);
 			//set screen using screen object
 
-			$("#player .deck-field").html(screen.player.deckCount);
+			if(screen.player.deckCount > 0){
+				ITDomination.deck.addClass("back-card").html(screen.player.deckCount);
+			}
+			else
+				ITDomination.deck.removeClass("back-card");
 
 			//set hand	
 			ITDomination.clear(ITDomination.hand);
@@ -44,6 +54,23 @@ var SocketHandlers = [
 			//set enemy front field
 			ITDomination.clear(ITDomination.enemy_front_field);
 			ITDomination.addCards(screen.enemy.front_field, ITDomination.enemy_front_field, "field-wrapper front-field");
+
+			//set market
+			if(screen.game.market)
+			{	
+				ITDomination.clear(ITDomination.market);
+				console.log("market");
+				console.log(screen.game.market);
+				ITDomination.addCards([screen.game.market], ITDomination.market, "field-wrapper");
+				ITDomination.market.prepend("체력 : "+screen.game.market.vit);
+			}
+
+			//set tomb
+			if(screen.player.tombCount > 0){
+				ITDomination.tomb.addClass("back-card").html(screen.player.tombCount);
+			}
+			else
+				ITDomination.tomb.removeClass("back-card");
 		}
 	}
 ];
@@ -64,7 +91,9 @@ var ITDomination = {
 		this.front_field = $("#player .front-fields");
 		this.back_field = $("#player .back-fields");
 		this.enemy_front_field = $("#enemy .front-fields");
-
+		this.market = $("#market");
+		this.deck = $("#player .deck-field");
+		this.tomb = $("#player .tomb-field");
 		//add view handlers
 
 		var socket = this.socket;
@@ -86,14 +115,17 @@ var ITDomination = {
 		obj.find("*").each(function(){
 			$(this).remove();
 		});
+		obj.html("");
 	}
 	,addCards : function(cards, to, className){
 		for(var i in cards){
-			to.append(
-				$("<div>").addClass(className).html(
-					$("<img>").attr("src",cards[i].proto.image).attr("index",cards[i].id).attr("playerIndex",cards[i].playerId)
-				)
-			);
+			if(cards[i] != null){
+				to.append(
+					$("<div>").addClass(className).html(
+						$("<img>").attr("src",cards[i].proto.image).attr("index",cards[i].id).attr("playerIndex",cards[i].playerId)
+					)
+				);
+			}
 		}
 	}
 };
