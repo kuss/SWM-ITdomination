@@ -26,10 +26,10 @@ var SocketHandlers = [
 var ITDomination = {
 	init : function(socket_url){ //initialize module
 		this.socket = io.connect(socket_url); //initialize socket
-
+		var self=this;
 		for(var sh in SocketHandlers){ //add socket event handler
 			(function(sh){
-				socket.on(sh.event,sh.handler);
+				self.socket.on(sh.event,sh.handler);
 			})(SocketHandlers[sh]);
 		}
 	}

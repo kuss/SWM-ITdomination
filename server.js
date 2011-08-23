@@ -6,6 +6,15 @@ var Io = require('socket.io').listen(App);
 var Constant = require('./lib/constant');
 var Game = require('./lib/game');
 var User = require('./lib/user');
+var Player = require('./lib/player');
+var ProtoCard = require('./lib/protocard');
+
+function initServer(){
+	//add id to all protocards
+	for(var i in ProtoCard){
+		ProtoCard[i].id = i;
+	}
+}
 
 App.configure(function(){
   App.set('views',__dirname + '/views');
@@ -26,6 +35,8 @@ App.listen(80);
 var users = {};
 var games = {};
 
+initServer();
+
 Io.sockets.on('connection', function(socket){
 	user = new User({
 		id : socket.id
@@ -36,14 +47,17 @@ Io.sockets.on('connection', function(socket){
 	});	
 
 	users[socket.id] = user;
-	user.send("welcome");
+	user.send("welcome"); //socket server connection success
 
 //	console.log(Util.length(users));
 
-/*	if(Util.length(users)==2){
+	if(Util.length(users)==2){
 		players = [];
 		for(var i in users){
 			var newPlayer = new Player(users[i]);
+			
+			newPlayer.deck = new Card(ProtoCard[0]); //TODO : 테스트를 위한 덱 설정이므로 지울것 
+
 			players.push(newPlayer);
 		}
 		game = new Game({
@@ -56,11 +70,9 @@ Io.sockets.on('connection', function(socket){
 			}
 		});
 
-		game.start();
+		game.startGame();
+	}
 
-//		games.push(game);
-
-	}*/
 	socket.on('disconnect',function(){
 		//TODO : in game?
 		delete users[socket.id];
