@@ -20,17 +20,29 @@ var SocketHandlers = [
 	,{
 		event : "setScreen"
 		,handler : function(screen){
+			console.log("screen : ")
 			console.log(screen);
-			$("#player .deck-field").html(screen.player.deckCount);
-			ITDomination.hand.find("*").each(function(){
-				$(this).remove();
-			});
+			//set screen using screen object
 
+			$("#player .deck-field").html(screen.player.deckCount);
+
+			//set hand
+	
+			ITDomination.clear(ITDomination.hand);
 			for(var i in screen.hand){
-				console.log(screen.hand[i]);
 				ITDomination.hand.append(
 					$("<div>").addClass("field-wrapper").html(
 						$("<img>").attr("src",screen.hand[i].proto.image).attr("index",screen.hand[i].id).attr("playerIndex",screen.hand[i].playerId)
+					)
+				);
+			}
+
+			//set player front field
+			ITDomination.clear(ITDomination.front_field);
+			for(var i in screen.player.front_field){
+				ITDomination.front_field.append(
+					$("<div>").addClass("field-wrapper front-field").html(
+						$("<img>").attr("src",screen.player.front_field[i].proto.image).attr("index",screen.player.front_field[i].id).attr("playerIndex",screen.player.front_field[i].playerId)
 					)
 				);
 			}
@@ -51,7 +63,9 @@ var ITDomination = {
 		this.hand = $("#hand");
 		this.player = $("#player");
 		this.enemy = $("#enemy");
-		
+		this.front_field = $("#player .front-fields");
+		this.back_field = $("#player .back-fields");
+
 		var socket = this.socket;
 		$(".field-wrapper img").live("click", function(){
 			if($(this).attr("index") != undefined && $(this).attr("index") != null && $(this).attr("playerIndex") != undefined && $(this).attr("playerIndex") != null){
@@ -62,7 +76,11 @@ var ITDomination = {
 	,intro : function(){ //show intro 
 		$("#intro").show();
 	}
-	
+	,clear : function(obj){
+		obj.find("*").each(function(){
+			$(this).remove();
+		});
+	}
 };
 
 function addLog(text){

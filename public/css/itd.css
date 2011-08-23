@@ -33,7 +33,7 @@ html,body {
 #player .tomb-field { float:left ;}
 #player .deck-field { float:left ;}
 
-.front-fields { padding-left:122px;}
+.front-fields { padding-left:122px; height:170px;}
 .deck-field { background:url('/back.jpg');}
 
 #market { 
