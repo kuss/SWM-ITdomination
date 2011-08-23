@@ -34,6 +34,7 @@ html,body {
 #player .deck-field { float:left ;}
 
 .front-fields { padding-left:122px;}
+.deck-field { background:url('/back.jpg');}
 
 #market { 
 	height:100px;
@@ -86,8 +87,12 @@ html,body {
 	height:140px;
 	margin:10px;
 	border:1px solid black;
+	text-align:center;
+	line-height:140px;
+	font-size:5em;
 }
 
+.field-wrapper img {cursor:pointer;}
 .side{
 	float:left;
 	clear:left;

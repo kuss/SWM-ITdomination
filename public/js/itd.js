@@ -13,12 +13,27 @@ var SocketHandlers = [
 	}
 	,{
 		event : "turnStart"
-		,hander : function(){
+		,handler : function(){
+			addLog("Your Turn!");
 		}
 	}
 	,{
 		event : "setScreen"
-		,handler : function(){
+		,handler : function(screen){
+			console.log(screen);
+			$("#player .deck-field").html(screen.player.deckCount);
+			ITDomination.hand.find("*").each(function(){
+				$(this).remove();
+			});
+
+			for(var i in screen.hand){
+				console.log(screen.hand[i]);
+				ITDomination.hand.append(
+					$("<div>").addClass("field-wrapper").html(
+						$("<img>").attr("src",screen.hand[i].proto.image).attr("index",screen.hand[i].id).attr("playerIndex",screen.hand[i].playerId)
+					)
+				);
+			}
 		}
 	}
 ];
@@ -32,6 +47,17 @@ var ITDomination = {
 				self.socket.on(sh.event,sh.handler);
 			})(SocketHandlers[sh]);
 		}
+
+		this.hand = $("#hand");
+		this.player = $("#player");
+		this.enemy = $("#enemy");
+		
+		var socket = this.socket;
+		$(".field-wrapper img").live("click", function(){
+			if($(this).attr("index") != undefined && $(this).attr("index") != null && $(this).attr("playerIndex") != undefined && $(this).attr("playerIndex") != null){
+				socket.emit("click", $(this).attr("playerIndex"), $(this).attr("index"));
+			}
+		});
 	}
 	,intro : function(){ //show intro 
 		$("#intro").show();

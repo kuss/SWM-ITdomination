@@ -44,6 +44,9 @@ Io.sockets.on('connection', function(socket){
 		,send : function(name,args){
 			socket.emit(name,args);
 		}
+		,on : function(name, func){
+			socket.on(name, func);
+		}
 	});	
 
 	users[socket.id] = user;
@@ -56,10 +59,12 @@ Io.sockets.on('connection', function(socket){
 		for(var i in users){
 			var newPlayer = new Player(users[i]);
 			
-			newPlayer.deck = [new Card(ProtoCard[0])]; //TODO : 테스트를 위한 덱 설정이므로 지울것 
+			newPlayer.deck = [new Card(ProtoCard[0]), new Card(ProtoCard[0]), new Card(ProtoCard[0]), new Card(ProtoCard[0]), new Card(ProtoCard[0])
+			]; //TODO : 테스트를 위한 덱 설정이므로 지울것 
 
 			players.push(newPlayer);
 		}
+
 		game = new Game({
 			players : players
 			,success : function(){
@@ -69,6 +74,12 @@ Io.sockets.on('connection', function(socket){
 			,complete : function(){
 			}
 		});
+
+		for(var i in players){ //카드 클릭 이벤트 등록 
+			players[i].on("click",function(playerId, cardId){
+				game.cardClick(players[i], playerId, cardId);
+			});
+		}
 
 		game.gameStart();
 	}
