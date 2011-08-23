@@ -32,26 +32,18 @@ var SocketHandlers = [
 
 			$("#player .deck-field").html(screen.player.deckCount);
 
-			//set hand
-	
+			//set hand	
 			ITDomination.clear(ITDomination.hand);
-			for(var i in screen.hand){
-				ITDomination.hand.append(
-					$("<div>").addClass("field-wrapper").html(
-						$("<img>").attr("src",screen.hand[i].proto.image).attr("index",screen.hand[i].id).attr("playerIndex",screen.hand[i].playerId)
-					)
-				);
-			}
+			ITDomination.addCards(screen.hand, ITDomination.hand, "field-wrapper");
 
 			//set player front field
 			ITDomination.clear(ITDomination.front_field);
-			for(var i in screen.player.front_field){
-				ITDomination.front_field.append(
-					$("<div>").addClass("field-wrapper front-field").html(
-						$("<img>").attr("src",screen.player.front_field[i].proto.image).attr("index",screen.player.front_field[i].id).attr("playerIndex",screen.player.front_field[i].playerId)
-					)
-				);
-			}
+			ITDomination.addCards(screen.player.front_field, ITDomination.front_field, "field-wrapper front-field");
+
+
+			//set enemy front field
+			ITDomination.clear(ITDomination.enemy_front_field);
+			ITDomination.addCards(screen.enemy.front_field, ITDomination.enemy_front_field, "field-wrapper front-field");
 		}
 	}
 ];
@@ -71,6 +63,7 @@ var ITDomination = {
 		this.enemy = $("#enemy");
 		this.front_field = $("#player .front-fields");
 		this.back_field = $("#player .back-fields");
+		this.enemy_front_field = $("#enemy .front-fields");
 
 		//add view handlers
 
@@ -93,6 +86,15 @@ var ITDomination = {
 		obj.find("*").each(function(){
 			$(this).remove();
 		});
+	}
+	,addCards : function(cards, to, className){
+		for(var i in cards){
+			to.append(
+				$("<div>").addClass(className).html(
+					$("<img>").attr("src",cards[i].proto.image).attr("index",cards[i].id).attr("playerIndex",cards[i].playerId)
+				)
+			);
+		}
 	}
 };
 
