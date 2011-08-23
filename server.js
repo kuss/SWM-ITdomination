@@ -8,6 +8,7 @@ var Game = require('./lib/game');
 var User = require('./lib/user');
 var Player = require('./lib/player');
 var ProtoCard = require('./lib/protocard');
+var Card = require('./lib/card');
 
 function initServer(){
 	//add id to all protocards
@@ -36,7 +37,6 @@ var users = {};
 var games = {};
 
 initServer();
-
 Io.sockets.on('connection', function(socket){
 	user = new User({
 		id : socket.id
@@ -56,7 +56,7 @@ Io.sockets.on('connection', function(socket){
 		for(var i in users){
 			var newPlayer = new Player(users[i]);
 			
-			newPlayer.deck = new Card(ProtoCard[0]); //TODO : 테스트를 위한 덱 설정이므로 지울것 
+			newPlayer.deck = [new Card(ProtoCard[0])]; //TODO : 테스트를 위한 덱 설정이므로 지울것 
 
 			players.push(newPlayer);
 		}
@@ -70,7 +70,7 @@ Io.sockets.on('connection', function(socket){
 			}
 		});
 
-		game.startGame();
+		game.gameStart();
 	}
 
 	socket.on('disconnect',function(){
