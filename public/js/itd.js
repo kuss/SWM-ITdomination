@@ -11,18 +11,42 @@ var SocketHandlers = [
 			addLog("gameStart");
 		}
 	}
+	,{
+		event : "turnStart"
+		,hander : function(){
+		}
+	}
+	,{
+		event : "setScreen"
+		,handler : function(){
+		}
+	}
 ];
+
+var ITDomination = {
+	init : function(socket_url){ //initialize module
+		this.socket = io.connect(socket_url); //initialize socket
+
+		for(var sh in SocketHandlers){ //add socket event handler
+			(function(sh){
+				socket.on(sh.event,sh.handler);
+			})(SocketHandlers[sh]);
+		}
+	}
+	,intro : function(){ //show intro 
+		$("#intro").show();
+	}
+	
+};
 
 function addLog(text){
 	$("#log").append("<li>"+text+"</li>");
 }
 
-$(function(){
-	var socket = io.connect(document.domain);
 
-	for(var sh in SocketHandlers){
-		(function(sh){
-			socket.on(sh.event,sh.handler);
-		})(SocketHandlers[sh]);
-	}
+$(function(){
+//	ITDomination.intro();
+
+	ITDomination.init(document.domain);
+
 });

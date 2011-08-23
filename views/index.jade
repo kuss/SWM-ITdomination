@@ -7,5 +7,35 @@ html
 		script(type="text/javascript", src="/socket.io/socket.io.js")
 		script(type="text/javascript", src="/js/itd.js")
 	body 
-		ul#log
+		#wrapper
+			#left
+				#enemy.side
+					.back-fields
+						.deck-field.field-wrapper
+						.tomb-field.field-wrapper
+						.back-field.field-wrapper
+						.back-field.field-wrapper
+						.back-field.field-wrapper
+					.front-fields
+						.front-field.field-wrapper
+						.front-field.field-wrapper
+						.front-field.field-wrapper
+				#market Market
+				#player.side
+					.front-fields
+						.front-field.field-wrapper
+						.front-field.field-wrapper
+						.front-field.field-wrapper
+					.back-fields
+						.back-field.field-wrapper
+						.back-field.field-wrapper
+						.back-field.field-wrapper
+						.tomb-field.field-wrapper
+						.deck-field.field-wrapper
+			#right
+				#game-info Game-info
+				#card-info Card-info
+				#hand Hand
+			#intro.full-screen intro 
+
 
