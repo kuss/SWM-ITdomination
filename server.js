@@ -76,9 +76,11 @@ Io.sockets.on('connection', function(socket){
 		});
 
 		for(var i in players){ //카드 클릭 이벤트 등록 
-			players[i].on("click",function(playerId, cardId){
-				game.cardClick(players[i], playerId, cardId);
-			});
+			(function(player_i){
+				player_i.on("click",function(playerId, cardId){
+					game.cardClick(player_i, playerId, cardId);
+				});
+			})(players[i]);
 		}
 
 		game.gameStart();
