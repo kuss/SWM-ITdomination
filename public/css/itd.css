@@ -36,6 +36,7 @@ html,body {
 .front-fields { padding-left:122px; height:170px;}
 .deck-field { background:url('/back.jpg');}
 
+#turn-end { float:right; clear:right; padding : 20px 150px 20px 150px;}
 #market { 
 	height:100px;
 	width:100px;
@@ -57,7 +58,7 @@ html,body {
 	margin-bottom:20px;
 	padding:10px;
 	width:500px;
-	height:300px;
+	height:100px;
 	clear:right;
 	background:yellow;
 }
@@ -73,6 +74,7 @@ html,body {
 	background : red;
 }
 
+#hand .field-wrapper { float:left;}
 
 
 

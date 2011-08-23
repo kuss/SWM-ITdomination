@@ -75,11 +75,16 @@ Io.sockets.on('connection', function(socket){
 			}
 		});
 
-		for(var i in players){ //카드 클릭 이벤트 등록 
+		for(var i in players){ 
 			(function(player_i){
-				player_i.on("click",function(playerId, cardId){
+				player_i.on("click",function(playerId, cardId){ //카드 클릭 이벤트 등록 
 					game.cardClick(player_i, playerId, cardId);
 				});
+
+				player_i.on("turnEndRequest",function(){
+					game.turnEnd(player_i);
+				});
+				
 			})(players[i]);
 		}
 

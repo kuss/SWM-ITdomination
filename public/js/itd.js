@@ -18,6 +18,12 @@ var SocketHandlers = [
 		}
 	}
 	,{
+		event : "turnEnd"
+		,handler : function(){
+			addLog("Turn End!");
+		}
+	}
+	,{
 		event : "setScreen"
 		,handler : function(screen){
 			console.log("screen : ")
@@ -66,11 +72,18 @@ var ITDomination = {
 		this.front_field = $("#player .front-fields");
 		this.back_field = $("#player .back-fields");
 
+		//add view handlers
+
 		var socket = this.socket;
+		
 		$(".field-wrapper img").live("click", function(){
 			if($(this).attr("index") != undefined && $(this).attr("index") != null && $(this).attr("playerIndex") != undefined && $(this).attr("playerIndex") != null){
 				socket.emit("click", $(this).attr("playerIndex"), $(this).attr("index"));
 			}
+		});
+
+		$("#turn-end").click(function(){
+			socket.emit("turnEndRequest");
 		});
 	}
 	,intro : function(){ //show intro 
