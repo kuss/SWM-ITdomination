@@ -55,7 +55,7 @@ Io.sockets.on('connection', function(socket){
 //	console.log(Util.length(users));
 
 	if(Util.length(users)==2){
-		players = [];
+		var players = [];
 		for(var i in users){
 			var newPlayer = new Player(users[i]);
 			
