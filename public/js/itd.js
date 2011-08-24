@@ -2,20 +2,20 @@ var SocketHandlers = [
 	{
 		event : "welcome"
 		,handler : function(){
-			ITDomination.addLog("welcome");
+			ITDomination.addLog("서버에 접속되었습니다.");
 		}
 	}
 	,{
 		event : "gameStart"
 		,handler : function(){
-			ITDomination.addLog("gameStart");
+			ITDomination.addLog("게임이 시작되었습니다.");
 		}
 	}
 	,{
 		event : "turnStart"
 		,handler : function(){
 			ITDomination.hand_wrapper.slideDown(100);
-			ITDomination.addLog("Your Turn!");
+			ITDomination.addLog("당신의 차례입니다.");
 		}
 	}
 	,{
@@ -27,26 +27,26 @@ var SocketHandlers = [
 	,{
 		event : "turnEnd"
 		,handler : function(){
-			ITDomination.addLog("Turn End!");
+			ITDomination.addLog("상대방의 차례입니다.");
 			ITDomination.hand_wrapper.slideUp(100);
 		}
 	}
 	,{
 		event : "gameDraw"
 		,handler : function() {
-			ITDomination.addLog("You Draw!");
+			ITDomination.addLog("게임 종료 - 무승부!");
 		}
 	}
 	,{
 		event : "gameWin"
 		,handler : function() {
-			ITDomination.addLog("You Win!");
+			ITDomination.addLog("게임 종료 - 당신의 승리!");
 		}
 	}
 	,{
 		event : "gameLose"
 		,handler : function() {
-			ITDomination.addLog("You Lose!");
+			ITDomination.addLog("게임 종료 - 당신의 패배!");
 		}
 	}
 	,{
