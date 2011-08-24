@@ -15,7 +15,7 @@ var SocketHandlers = [
 		event : "turnStart"
 		,handler : function(){
 			ITDomination.hand_wrapper.slideDown(100);
-			ITDomination.addLog("당신의 차례입니다.");
+			ITDomination.addLog("당신의 차례입니다.", true);
 		}
 	}
 	,{
@@ -27,7 +27,7 @@ var SocketHandlers = [
 	,{
 		event : "turnEnd"
 		,handler : function(){
-			ITDomination.addLog("상대방의 차례입니다.");
+			ITDomination.addLog("상대방의 차례입니다.", true);
 			ITDomination.hand_wrapper.slideUp(100);
 		}
 	}
@@ -316,8 +316,13 @@ var ITDomination = {
 				<div class="card-info-effect">'+card.proto.text+'</div>';
 		}
 	}
-	,addLog : function(text){
-		ITDomination.log.append("<li>"+text+"</li>");
+	,addLog : function(text, flag){
+		if(flag){
+			ITDomination.log.append("<li class=\"sep\">"+text+"</li>");
+		}
+		else{
+			ITDomination.log.append("<li>"+text+"</li>");
+		}
 		ITDomination.game_log.prop('scrollTop', ITDomination.game_log.prop("scrollHeight"));
 	}
 };
