@@ -59,16 +59,16 @@ Io.sockets.on('connection', function(socket){
 	users[socket.id] = user;
 	user.send("welcome"); //socket server connection success
 	
-	Util.push(lobby.users, user);
-	lobby.addLobbyListener(user);	
+	lobby.initLobby(user);
 
 	if(Util.length(users)==2){
 		lobby.addGame(users);
 	}
 
 	socket.on('disconnect',function(){
-		//TODO : in game?
+		lobby.removeUser(users[socket.id]);
 		delete users[socket.id];
+
 	});
 
 }); 
