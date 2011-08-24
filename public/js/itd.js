@@ -14,6 +14,7 @@ var SocketHandlers = [
 	,{
 		event : "turnStart"
 		,handler : function(){
+			ITDomination.hand_wrapper.slideDown(100);
 			addLog("Your Turn!");
 		}
 	}
@@ -48,12 +49,12 @@ var SocketHandlers = [
 
 			//set player front field
 			ITDomination.clear(ITDomination.front_field);
-			ITDomination.addCards(screen.player.front_field, ITDomination.front_field, "field-wrapper front-field");
+			ITDomination.addCards(screen.player.front_field, ITDomination.front_field, "field-wrapper front-field", 3);
 
 
 			//set enemy front field
 			ITDomination.clear(ITDomination.enemy_front_field);
-			ITDomination.addCards(screen.enemy.front_field, ITDomination.enemy_front_field, "field-wrapper front-field");
+			ITDomination.addCards(screen.enemy.front_field, ITDomination.enemy_front_field, "field-wrapper front-field", 3);
 
 			//set market
 			if(screen.game.market)
@@ -88,6 +89,7 @@ var ITDomination = {
 		//set view element
 
 		this.hand = $("#hand");
+		this.hand_wrapper = $("#hand-wrapper");
 		this.player = $("#player");
 		this.enemy = $("#enemy");
 		this.front_field = $("#player .front-fields");
@@ -107,8 +109,11 @@ var ITDomination = {
 		var socket = this.socket;
 
 		$(".field-wrapper img").live("click", function(e){
-			console.log(ITDomination.data[$(this).attr("playerIndex")][$(this).attr("index")]);
-///			ITDomination.card_info_text.html($.data($
+			var card = ITDomination.data[$(this).attr("playerIndex")][$(this).attr("index")];
+			// set card info using card object
+
+			ITDomination.card_info_image.html($("<img>").attr("src", card.proto.image));
+			ITDomination.card_info_text.html(ITDomination.cardtoInfo(card));
 			ITDomination.card_info.show();
 			ITDomination.focused = $(this);
 		})
@@ -116,6 +121,10 @@ var ITDomination = {
 		ITDomination.card_info.live("click", function(e){
 			ITDomination.card_info.hide();
 			ITDomination.focused = null;
+		});
+
+		$("#hand-toggle").click(function(){
+			ITDomination.hand_wrapper.slideToggle(100);
 		});
 
 		$("#card-info-use").click(function(){
@@ -150,19 +159,50 @@ var ITDomination = {
 		});
 		obj.html("");
 	}
-	,addCards : function(cards, to, className){
-		for(var i in cards){
-			if(cards[i] != null){
-				(function(card_i){
-				var ne = $("<div>").addClass(className).html(
-							$("<img>").attr("src",card_i.proto.image).attr("index",card_i.id).attr("playerIndex",card_i.playerId)
-					);
+	,addCards : function(cards, to, className, max){
+		if( max == undefined){
+			for(var i in cards){
+				if(cards[i] != null){
+					(function(card_i){
+					var ne = $("<div>").addClass(className).html(
+								$("<img>").attr("src",card_i.proto.image).attr("index",card_i.id).attr("playerIndex",card_i.playerId)
+						);
 
-				ITDomination.data[card_i.playerId][card_i.id] = card_i;
-				to.append(ne);
-				})(cards[i]);
+					ITDomination.data[card_i.playerId][card_i.id] = card_i;
+					to.append(ne);
+					})(cards[i]);
+				}
 			}
 		}
+		else
+		{
+			for(var i=0;i<max;i++){
+				if(cards[i] != null && cards[i] != undefined){
+					(function(card_i){
+					var ne = $("<div>").addClass(className).html(
+								$("<img>").attr("src",card_i.proto.image).attr("index",card_i.id).attr("playerIndex",card_i.playerId)
+						);
+
+					ITDomination.data[card_i.playerId][card_i.id] = card_i;
+					to.append(ne);
+					})(cards[i]);
+				}
+				else
+				{
+					to.append($("<div>").addClass(className));
+				}
+			}
+		}
+	}
+	,cardtoInfo : function(card){
+		console.log(card);
+		return '<h1 class"card-info-name">'+card.proto.name+'</h1>\
+		<table>\
+		<tr><td class="card-info-key">공격력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.atk+'</span> ('+card.proto.atk+')</td></tr>\
+		<tr><td class="card-info-key">체력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.vit+'</span> / '+card.proto.vit+')</td></tr>\
+		<tr><td class="card-info-key">점유력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.occ+'</span> ('+card.proto.occ+')</td></tr>\
+		<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
+		</table>';
 	}
 };
 
