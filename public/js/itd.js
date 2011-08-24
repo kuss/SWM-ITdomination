@@ -57,7 +57,7 @@ var SocketHandlers = [
 			ITDomination.addCards(screen.enemy.front_field, ITDomination.enemy_front_field, "field-wrapper front-field", 3);
 
 			//set market
-			if(screen.game.market)
+			if(screen.game.market.card)
 			{	
 				ITDomination.clear(ITDomination.market);
 				console.log(screen.game.market);
@@ -65,10 +65,10 @@ var SocketHandlers = [
 
 				//색 변환 
 				var color;
-				color = screen.game.market.vit / screen.game.market.proto.vit;
+				color = screen.game.market.card.vit / screen.game.market.card.proto.vit;
 				if(color>1)color=1;
 				color = Math.ceil(255 * (1- color));
-				ITDomination.market.children().append($("<div>").addClass("field-text-wrapper").css("color","rgb("+color+","+color+","+color+")").text(screen.game.market.vit));
+				ITDomination.market.children().append($("<div>").addClass("field-text-wrapper").css("color","rgb("+color+","+color+","+color+")").text(screen.game.market.card.vit));
 			}
 
 			//set tomb
@@ -120,6 +120,7 @@ var ITDomination = {
 		this.card_info = $("#card-info");
 		this.card_info_image = $("#card-info-image");
 		this.card_info_text = $("#card-info-text");
+		this.card_info_action = $("#card-info-action");
 		this.game_log = $("#game-log");
 		this.focused = null;
 		this.data = {0 : {}, 1 : {}};
@@ -135,9 +136,31 @@ var ITDomination = {
 		$(".field-wrapper img").live("click", function(e){
 			var card = ITDomination.data[$(this).attr("playerIndex")][$(this).attr("index")];
 			// set card info using card object
+			ITDomination.card_info_image.html($("<img>").attr("src", card.card.proto.image));
 
-			ITDomination.card_info_image.html($("<img>").attr("src", card.proto.image));
-			ITDomination.card_info_text.html(ITDomination.cardtoInfo(card));
+			ITDomination.card_info_text.html(ITDomination.cardtoInfo(card.card));
+
+			// set action
+			ITDomination.clear(ITDomination.card_info_action);
+			for(var i in card.action){
+				var action = $("<button>");
+				action.html(card.action[i].name);
+				action.click(function(){
+					if(ITDomination.focused != null){
+						var focused = ITDomination.focused;
+						if(focused.attr("index") != null 
+							&& focused.attr("index") != undefined
+							&& focused.attr("playerIndex") != null
+							&& focused.attr("playerIndex") != undefined
+						){
+							ITDomination.socket.emit(card.action[i].event, focused.attr("playerIndex"), focused.attr("index"));
+						}
+					}
+				});
+				ITDomination.card_info_action.append(action);
+			}
+			//add close button
+			ITDomination.card_info_action.append($("<button>").addClass("card-info-close").html("Close"));
 			ITDomination.card_info.show();
 			ITDomination.focused = $(this);
 		})
@@ -161,7 +184,7 @@ var ITDomination = {
 			ITDomination.hand_wrapper.slideToggle(100);
 		});
 
-		$("#card-info-use").click(function(){
+		$(".card-info-use").live("click",function(){
 			if(ITDomination.focused != null){
 				var focused = ITDomination.focused;
 				if(focused.attr("index") != null 
@@ -174,7 +197,7 @@ var ITDomination = {
 			}
 		});
 
-		$("#card-info-close").click(function(e){
+		$(".card-info-close").live("click",function(e){
 			e.stopPropagation();
 			ITDomination.card_info.hide();
 			ITDomination.focused = null;
@@ -199,10 +222,10 @@ var ITDomination = {
 				if(cards[i] != null){
 					(function(card_i){
 					var ne = $("<div>").addClass(className).html(
-								$("<img>").attr("src",card_i.proto.image).attr("index",card_i.id).attr("playerIndex",card_i.playerId)
+								$("<img>").attr("src",card_i.card.proto.image).attr("index",card_i.card.id).attr("playerIndex",card_i.card.playerId)
 						);
 
-					ITDomination.data[card_i.playerId][card_i.id] = card_i;
+					ITDomination.data[card_i.card.playerId][card_i.card.id] = card_i;
 					to.append(ne);
 					})(cards[i]);
 				}
@@ -214,10 +237,10 @@ var ITDomination = {
 				if(cards[i] != null && cards[i] != undefined){
 					(function(card_i){
 					var ne = $("<div>").addClass(className).html(
-								$("<img>").attr("src",card_i.proto.image).attr("index",card_i.id).attr("playerIndex",card_i.playerId)
+								$("<img>").attr("src",card_i.card.proto.image).attr("index",card_i.card.id).attr("playerIndex",card_i.card.playerId)
 						);
 
-					ITDomination.data[card_i.playerId][card_i.id] = card_i;
+					ITDomination.data[card_i.card.playerId][card_i.card.id] = card_i;
 					to.append(ne);
 					})(cards[i]);
 				}
@@ -235,7 +258,9 @@ var ITDomination = {
 		<tr><td class="card-info-key">체력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.vit+'</span> / '+card.proto.vit+'</td></tr>\
 		<tr><td class="card-info-key">점유력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.occ+'</span> ('+card.proto.occ+')</td></tr>\
 		<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
-		</table>';
+		</table>\
+		<div class="card-info-effect-header">효과</div>\
+		<div class="card-info-effect">'+card.proto.text+'</div>';
 	}
 	,addLog : function(text){
 		ITDomination.log.append("<li>"+text+"</li>");

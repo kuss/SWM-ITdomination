@@ -228,7 +228,7 @@ width:20%; float:right
 	color:white;
 	float:left;
 	width:200px;
-	height:200px;
+	height:240px;
 	margin:10px;
 	margin-left:10px;
 	margin-top:20px;
@@ -240,7 +240,7 @@ width:20%; float:right
 	margin:5px;
 }
 #card-info-action button{
-	padding:10px 20px 10px 20px;
+	padding:5px 15px 5px 15px;
 }
 
 #card-info h1 { text-align:center; font-size : 1.5em; font-weight:bold; padding:0px 0px 20px 0px;}
@@ -249,6 +249,9 @@ width:20%; float:right
 #card-info .card-info-key { width: 50px; text-align:center;}
 #card-info .card-info-value { width: 100px; text-align:center; }
 #card-info .hl { font-weight : bold;}
+#card-info .card-info-effect-header { padding: 5px; font-weight:bold;}
+#card-info .card-info-effect {padding-left:20px; text-indent:1em;}
+
 .full-screen{
 	width:100%;
 	height:100%;
