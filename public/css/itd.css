@@ -1,7 +1,8 @@
 
 
 body {
-	font-family : "Malgun Gothic";
+	font-family : "Tahoma", "Malgun Gothic";
+	font-size : 0.8em;
 }
 
 #wrapper {
@@ -113,7 +114,7 @@ body {
 #card-info {
 	z-index:500;
 	display:none;
-	width:500px;
+	width:480px;
 	height:320px;
 	position:absolute;
 	top:25%;
@@ -142,25 +143,36 @@ body {
 	float:left;
 }
 
+#card-info-image img{
+	height:280px;
+	width:200px;
+}
 #card-info-text{
 	z-index:300;
 	color:white;
-	float:right;
+	float:left;
 	width:200px;
 	height:200px;
-	margin:20px;
+	margin:10px;
+	margin-left:10px;
+	margin-top:20px;
 }
 
 #card-info-action{
 	float:right;
 	z-index:300;
-	margin:20px;
+	margin:5px;
 }
 #card-info-action button{
 	padding:10px 20px 10px 20px;
 }
 
-
+#card-info h1 { text-align:center; font-size : 1.5em; font-weight:bold; padding:0px 0px 20px 0px;}
+#card-info table { margin:auto;}
+#card-info td { width:30px; text-align:center; padding-bottom : 5px;}
+#card-info .card-info-key { width: 50px; text-align:center;}
+#card-info .card-info-value { width: 100px; text-align:center; }
+#card-info .hl { font-weight : bold;}
 .full-screen{
 	width:100%;
 	height:100%;

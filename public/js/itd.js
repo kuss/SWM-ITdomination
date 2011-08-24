@@ -109,8 +109,11 @@ var ITDomination = {
 		var socket = this.socket;
 
 		$(".field-wrapper img").live("click", function(e){
-			console.log(ITDomination.data[$(this).attr("playerIndex")][$(this).attr("index")]);
-///			ITDomination.card_info_text.html($.data($
+			var card = ITDomination.data[$(this).attr("playerIndex")][$(this).attr("index")];
+			// set card info using card object
+
+			ITDomination.card_info_image.html($("<img>").attr("src", card.proto.image));
+			ITDomination.card_info_text.html(ITDomination.cardtoInfo(card));
 			ITDomination.card_info.show();
 			ITDomination.focused = $(this);
 		})
@@ -190,6 +193,16 @@ var ITDomination = {
 				}
 			}
 		}
+	}
+	,cardtoInfo : function(card){
+		console.log(card);
+		return '<h1 class"card-info-name">'+card.proto.name+'</h1>\
+		<table>\
+		<tr><td class="card-info-key">공격력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.atk+'</span> ('+card.proto.atk+')</td></tr>\
+		<tr><td class="card-info-key">체력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.vit+'</span> / '+card.proto.vit+')</td></tr>\
+		<tr><td class="card-info-key">점유력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.occ+'</span> ('+card.proto.occ+')</td></tr>\
+		<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
+		</table>';
 	}
 };
 
