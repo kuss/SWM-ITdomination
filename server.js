@@ -45,59 +45,25 @@ Io.sockets.on('connection', function(socket){
 	user = new User({
 		id : socket.id
 		,name : "test"
-		,send : function(name,args){
-			socket.emit(name,args);
+		,send : function(name,a,b,c){
+			socket.emit(name,a,b,c);
 		}
 		,on : function(name, func){
 			socket.on(name, func);
+		}
+		,removeListener : function(name, func) {
+			socket.removeListener(name, func);
 		}
 	});	
 
 	users[socket.id] = user;
 	user.send("welcome"); //socket server connection success
-
-//	console.log(Util.length(users));
+	
+	Util.push(lobby.users, user);
+	lobby.addLobbyListener(user);	
 
 	if(Util.length(users)==2){
-		var players = [];
-		for(var i in users){
-			var newPlayer = new Player(users[i]);
-			
-			newPlayer.deck = [new Card(ProtoCard[0]), new Card(ProtoCard[0]), new Card(ProtoCard[2]), new Card(ProtoCard[1]), new Card(ProtoCard[1])
-			]; //TODO : 테스트를 위한 덱 설정이므로 지울것 
-		
-			players.push(newPlayer);
-		}
-
-		game = new Game({
-			players : players
-			,success : function(){
-			}
-			,error : function(){
-			}
-			,complete : function(){
-			}
-		});
-
-		for(var i in players){ 
-			(function(player_i){
-				player_i.proto.on("click",function(playerId, cardId){ //카드 클릭 이벤트 등록 
-					console.log("clicked");
-					game.cardClick(player_i, playerId, cardId);
-				});
-
-				player_i.proto.on("turnEndRequest",function(){
-					game.turnEnd(player_i);
-				});
-
-				player_i.proto.on("chat", function(content){
-					game.chat(content);
-				});
-				
-			})(players[i]);
-		}
-
-		game.gameStart();
+		lobby.addGame(users);
 	}
 
 	socket.on('disconnect',function(){

@@ -103,7 +103,7 @@ body {
 
 #game-money {
 	background : url(/coin.png) no-repeat;
-	height:48px;
+	height:58px;
 	text-align:right;
 	line-height:20px;
 	padding-right:10px;
