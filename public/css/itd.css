@@ -133,6 +133,7 @@ body {
 	padding:10px 10px 5px 10px;
 	overflow-y : scroll;
 }
+#game-log li {padding-bottom : 2px;}
 #game-chat {
 	width:320px;
 	float:right;
@@ -158,6 +159,7 @@ width:20%; float:right
 
 #hand-wrapper{
 	display:none;
+	z-index : 5;
 	border:1px solid;
 	position:absolute;
 	width:90%;
@@ -171,19 +173,15 @@ width:20%; float:right
 #hand-wrapper .field-wrapper {margin:10px;}
 
 #hand-background{
-	z-index:3000;
 	opacity:0.9;
 	background:black;
 	position:absolute;
 	height:100%;
 	width:100%;
 }
-
-#hand *{
-	z-index:5000;
-	position:absolute;
-}
-#hand .field-wrapper { float:left;}
+#hand { z-index:3000; position:absolute;}
+#hand .field-wrapper {z-index:3000; float:left; position:relative;}
+#hand img{z-index:3000; position:absolute;}
 
 
 
