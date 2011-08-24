@@ -81,16 +81,16 @@ Io.sockets.on('connection', function(socket){
 
 		for(var i in players){ 
 			(function(player_i){
-				player_i.on("click",function(playerId, cardId){ //카드 클릭 이벤트 등록 
+				player_i.proto.on("click",function(playerId, cardId){ //카드 클릭 이벤트 등록 
 					console.log("clicked");
 					game.cardClick(player_i, playerId, cardId);
 				});
 
-				player_i.on("turnEndRequest",function(){
+				player_i.proto.on("turnEndRequest",function(){
 					game.turnEnd(player_i);
 				});
 
-				player_i.on("chat", function(content){
+				player_i.proto.on("chat", function(content){
 					game.chat(content);
 				});
 				
