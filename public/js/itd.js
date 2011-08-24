@@ -60,10 +60,15 @@ var SocketHandlers = [
 			if(screen.game.market)
 			{	
 				ITDomination.clear(ITDomination.market);
-				console.log("market");
 				console.log(screen.game.market);
 				ITDomination.addCards([screen.game.market], ITDomination.market, "field-wrapper");
-				ITDomination.market.prepend("체력 : "+screen.game.market.vit);
+
+				//색 변환 
+				var color;
+				color = screen.game.market.vit / screen.game.market.proto.vit;
+				if(color>1)color=1;
+				color = Math.ceil(255 * (1- color));
+				ITDomination.market.children().append($("<div>").addClass("field-text-wrapper").css("color","rgb("+color+","+color+","+color+")").text(screen.game.market.vit));
 			}
 
 			//set tomb
@@ -72,6 +77,15 @@ var SocketHandlers = [
 			}
 			else
 				ITDomination.tomb.removeClass("back-card");
+
+			//set player occ
+			var enemy_occ = ITDomination.maxOcc - screen.player.occ;
+			ITDomination.occ_enemy.text(enemy_occ);
+			ITDomination.occ_player.text(screen.player.occ);
+			ITDomination.occ_bar.css("width", Math.ceil(enemy_occ/ITDomination.maxOcc*100)+"%");
+
+			//set game info
+
 		}
 	}
 ];
@@ -86,8 +100,10 @@ var ITDomination = {
 			})(SocketHandlers[sh]);
 		}
 
-		//set view element
+		//set constant
+		this.maxOcc = 100;
 
+		//set view element
 		this.hand = $("#hand");
 		this.hand_wrapper = $("#hand-wrapper");
 		this.player = $("#player");
@@ -106,6 +122,9 @@ var ITDomination = {
 		this.focused = null;
 		this.data = {0 : {}, 1 : {}};
 		this.chat_content = $("#game-chat-content");
+		this.occ_enemy = $("#game-occ-enemy-value");
+		this.occ_player = $("#game-occ-player-value");
+		this.occ_bar =$("#game-occ-bar");
 
 		//add view handlers
 

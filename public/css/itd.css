@@ -50,8 +50,8 @@ body {
 	position:relative;
 	z-index:2;
 }
-#market div { position:absolute; z-index:1;}
-#market div img {z-index:1;}
+#market> div { position:absolute; z-index:1;}
+#market>div img {z-index:1;}
 #game-info {
 	width:300px;
 	height:200px;
@@ -60,6 +60,45 @@ body {
 	padding:10px;
 	border : 1px solid black;
 }
+
+#game-occ{
+	font-size : 1em;
+}
+
+#game-occ-bar-wrapper {
+	padding:20px 50px 0px 50px;
+}
+
+#game-occ-bar-background{
+	height:3px;
+	width:100%;
+	background : #736aff;
+	position:relative;
+}
+
+#game-occ-bar {
+	height : 100%;
+	width : 50%;
+	background : #f75d59;
+	position:absolute;
+}
+
+#game-occ-enemy{
+	float:left;
+	width:50px;
+	height:30px;
+	text-align:center;
+}
+
+#game-occ-player{
+	float:right;
+	width:50px;
+	height:30px;
+	text-align:center;
+}
+
+#game-occ-enemy-value {font-size : 1.2em; font-weight:bold; color : #f75d59;}
+#game-occ-player-value { font-size : 1.2em; font-weight:bold; color : #736aff;}
 #game-log {
 	width:300px;
 	height:300px;
@@ -199,6 +238,22 @@ width:20%; float:right
 	font-size:5em;
 	box-shadow : 2px 2px 2px #444444;
 	-moz-box-shadow : 2px 2px 2px #444444;
+	position:relative;
+}
+
+.field-text-wrapper{
+	position:absolute;
+	left:0px;
+	right:0px;
+	margin:auto;
+	width:80px;
+	height:25px;
+	text-align:center;
+	font-size : 0.3em;
+	font-weight:bold;
+	padding:0px;
+	line-height:25px;
+	bottom:6px;
 }
 
 .field-wrapper img {cursor:pointer;}
