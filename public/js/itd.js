@@ -83,7 +83,9 @@ var SocketHandlers = [
 			ITDomination.occ_enemy.text(enemy_occ);
 			ITDomination.occ_player.text(screen.player.occ);
 			ITDomination.occ_bar.css("width", Math.ceil(enemy_occ/ITDomination.maxOcc*100)+"%");
-
+			
+			//set player money
+			ITDomination.money.html("\\ "+screen.player.money + "<br /><span class=\"money-per-turn\">\\ "+screen.player.moneyPerTurn + " per turn</span>");
 			//set game info
 
 		}
@@ -125,7 +127,7 @@ var ITDomination = {
 		this.occ_enemy = $("#game-occ-enemy-value");
 		this.occ_player = $("#game-occ-player-value");
 		this.occ_bar =$("#game-occ-bar");
-
+		this.money = $("#game-money");
 		//add view handlers
 
 		var socket = this.socket;
