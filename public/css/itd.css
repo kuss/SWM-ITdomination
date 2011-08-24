@@ -5,8 +5,9 @@ body {
 }
 
 #wrapper {
+	position:relative;
 	margin:auto;
-	width:1200px;
+	width:920px;
 	padding-top:10px;
 }
 
@@ -18,8 +19,7 @@ body {
 
 /* Game Field Style */
 
-#left { float:left; 
-
+#left { float:left;
 }
 #right { float:right; 
 }
@@ -40,7 +40,6 @@ body {
 .front-fields { padding-left:112px; height:155px;}
 .back-card {background:url('/back.jpg');}
 
-#turn-end { float:right; clear:right; padding : 20px 150px 20px 150px;}
 #market { 
 	height:150px;
 	width:100px;
@@ -53,12 +52,62 @@ body {
 #market div { position:absolute; z-index:1;}
 #market div img {z-index:1;}
 #game-info {
-	width:500px;
-	height:120px;
+	width:300px;
+	height:200px;
 	float:right;
 	margin-bottom:20px;
 	padding:10px;
+	border : 1px solid black;
 }
+#game-log {
+	width:300px;
+	height:300px;
+	float:right;
+	clear:right;
+	margin-bottom:20px;
+	padding:10px;
+	border : 1px solid black;
+	overflow-y : scroll;
+}
+#turn-end { float:right; clear:right; padding : 20px 20px 20px 20px; width:100%;}
+
+#hand-toggle{
+	cursor : pointer; text-align:center;
+	width:100%;
+	padding-top:10px;
+	padding-bottom:10px;
+	clear:both;
+}
+
+#hand-wrapper{
+	display:none;
+	border:1px solid;
+	position:absolute;
+	width:90%;
+	left:0;
+	right:0;
+	margin:auto;
+	clear:both;
+	height : 160px;
+	bottom:50px;
+}
+#hand-wrapper .field-wrapper {margin:10px;}
+
+#hand-background{
+	z-index:3000;
+	opacity:0.9;
+	background:black;
+	position:absolute;
+	height:100%;
+	width:100%;
+}
+
+#hand *{
+	z-index:5000;
+	position:absolute;
+}
+#hand .field-wrapper { float:left;}
+
 
 
 #card-info {
@@ -111,17 +160,6 @@ body {
 	padding:10px 20px 10px 20px;
 }
 
-#hand {
-	float:right;
-	padding:10px;
-	width:500px;
-	height:300px;
-	clear:right;
-}
-
-#hand .field-wrapper { float:left;}
-
-
 
 .full-screen{
 	width:100%;
@@ -144,7 +182,7 @@ body {
 .side{
 	float:left;
 	clear:left;
-	width : 620px;
+	width : 560px;
 	height : 300px;
 	padding-bottom:10px;
 }
