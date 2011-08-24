@@ -31,6 +31,24 @@ var SocketHandlers = [
 		}
 	}
 	,{
+		event : "gameDraw"
+		,handler : function() {
+			ITDomination.addLog("You Draw!");
+		}
+	}
+	,{
+		event : "gameWin"
+		,handler : function() {
+			ITDomination.addLog("You Win!");
+		}
+	}
+	,{
+		event : "gameLose"
+		,handler : function() {
+			ITDomination.addLog("You Lose!");
+		}
+	}
+	,{
 		event : "setScreen"
 		,handler : function(screen){
 			console.log("screen : ")
