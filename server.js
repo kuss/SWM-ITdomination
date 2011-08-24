@@ -85,6 +85,10 @@ Io.sockets.on('connection', function(socket){
 				player_i.on("turnEndRequest",function(){
 					game.turnEnd(player_i);
 				});
+
+				player_i.on("chat", function(content){
+					game.chat(content);
+				});
 				
 			})(players[i]);
 		}
