@@ -62,7 +62,10 @@ body {
 }
 
 #game-occ{
-	font-size : 1em;
+	background : url(/flag.png) no-repeat;
+	padding-left:50px;
+	padding-top:10px;
+	height:48px;
 }
 
 #game-occ-bar-wrapper {
@@ -99,6 +102,20 @@ body {
 
 #game-occ-enemy-value {font-size : 1.2em; font-weight:bold; color : #f75d59;}
 #game-occ-player-value { font-size : 1.2em; font-weight:bold; color : #736aff;}
+
+#game-money {
+	background : url(/coin.png) no-repeat;
+	height:48px;
+	text-align:right;
+	line-height:20px;
+	padding-right:10px;
+	font-family : Malgun Gothic;
+	color : #fdd017;
+	font-size : 1.5em;
+	font-weight:bold
+}
+
+.money-per-turn { font-size : 0.8em;}
 #game-log {
 	width:300px;
 	height:300px;
