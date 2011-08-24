@@ -54,11 +54,9 @@ body {
 #market>div img {z-index:1;}
 #game-info {
 	width:300px;
-	height:200px;
 	float:right;
 	margin-bottom:20px;
 	padding:10px;
-	border : 1px solid black;
 }
 
 #game-occ{
@@ -109,13 +107,24 @@ body {
 	text-align:right;
 	line-height:20px;
 	padding-right:10px;
-	font-family : Malgun Gothic;
 	color : #fdd017;
 	font-size : 1.5em;
-	font-weight:bold
+	font-weight:bold;
+	text-shadow : 0 1px 1px #eac117;/* eac117 */
 }
 
 .money-per-turn { font-size : 0.8em;}
+#game-launch {
+	background : url(/launch.jpg) no-repeat;
+	height:48px;
+	text-align:right;
+	line-height:20px;
+	padding-right:10px;
+	color : #fdd017;
+	font-size : 1.5em;
+	text-shadow : 0 1px 1px #eac117;/* eac117 */
+}
+.launch-text { font-size:0.8em;}
 #game-log {
 	width:300px;
 	height:300px;
