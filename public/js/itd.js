@@ -28,6 +28,7 @@ var SocketHandlers = [
 		event : "turnEnd"
 		,handler : function(){
 			ITDomination.addLog("Turn End!");
+			ITDomination.hand_wrapper.slideUp(100);
 		}
 	}
 	,{
@@ -181,8 +182,8 @@ var ITDomination = {
 			ITDomination.card_info_action.append($("<button>").addClass("card-info-close").html("Close"));
 			ITDomination.card_info.show();
 			ITDomination.focused = $(this);
-		})
-
+			e.stopPropagation();
+		});
 
 		// chat 
 		$("#game-chat").submit(function(){
