@@ -2,32 +2,32 @@ var SocketHandlers = [
 	{
 		event : "welcome"
 		,handler : function(){
-			addLog("welcome");
+			ITDomination.addLog("welcome");
 		}
 	}
 	,{
 		event : "gameStart"
 		,handler : function(){
-			addLog("gameStart");
+			ITDomination.addLog("gameStart");
 		}
 	}
 	,{
 		event : "turnStart"
 		,handler : function(){
 			ITDomination.hand_wrapper.slideDown(100);
-			addLog("Your Turn!");
+			ITDomination.addLog("Your Turn!");
 		}
 	}
 	,{
 		event : "message"
 		,handler : function(message){
-			addLog(message);
+			ITDomination.addLog(message);
 		}
 	}
 	,{
 		event : "turnEnd"
 		,handler : function(){
-			addLog("Turn End!");
+			ITDomination.addLog("Turn End!");
 		}
 	}
 	,{
@@ -97,12 +97,14 @@ var ITDomination = {
 		this.enemy_front_field = $("#enemy .front-fields");
 		this.market = $("#market");
 		this.deck = $("#player .deck-field");
+		this.log = $("#log");
 		this.tomb = $("#player .tomb-field");
 		this.card_info = $("#card-info");
 		this.card_info_image = $("#card-info-image");
 		this.card_info_text = $("#card-info-text");
 		this.focused = null;
 		this.data = {0 : {}, 1 : {}};
+		this.chat_content = $("#game-chat-content");
 
 		//add view handlers
 
@@ -118,6 +120,16 @@ var ITDomination = {
 			ITDomination.focused = $(this);
 		})
 
+
+		// chat 
+		$("#game-chat").submit(function(){
+			if(ITDomination.chat_content.val().length > 0){
+				ITDomination.socket.emit("chat",ITDomination.chat_content.val());
+				ITDomination.chat_content.val('').focus();
+			}
+			return false;
+		});
+		// show card info when card clicked
 		ITDomination.card_info.live("click", function(e){
 			ITDomination.card_info.hide();
 			ITDomination.focused = null;
@@ -195,7 +207,6 @@ var ITDomination = {
 		}
 	}
 	,cardtoInfo : function(card){
-		console.log(card);
 		return '<h1 class"card-info-name">'+card.proto.name+'</h1>\
 		<table>\
 		<tr><td class="card-info-key">공격력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.atk+'</span> ('+card.proto.atk+')</td></tr>\
@@ -204,11 +215,12 @@ var ITDomination = {
 		<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
 		</table>';
 	}
+	,addLog : function(text){
+		ITDomination.log.append("<li>"+text+"</li>");
+	}
 };
 
-function addLog(text){
-	$("#log").append("<li>"+text+"</li>");
-}
+
 
 
 $(function(){
