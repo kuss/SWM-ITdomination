@@ -70,11 +70,17 @@ var SocketHandlers = [
 			ITDomination.clear(ITDomination.front_field);
 			ITDomination.addCards(screen.player.front_field, ITDomination.front_field, "field-wrapper front-field", 3);
 
-
+			//set player back field
+			ITDomination.clear(ITDomination.back_field);
+			ITDomination.addCards(screen.player.back_field, ITDomination.back_field, "field-wrapper back-field", 3);
 			//set enemy front field
 			ITDomination.clear(ITDomination.enemy_front_field);
 			ITDomination.addCards(screen.enemy.front_field, ITDomination.enemy_front_field, "field-wrapper front-field", 3);
-
+			
+			//set enemy back field
+			ITDomination.clear(ITDomination.enemy_back_field);
+			ITDomination.addCards(screen.enemy.back_field, ITDomination.enemy_back_field, "field-wrapper back-field", 3);
+	
 			//set market
 			if(screen.game.market.card)
 			{	
@@ -130,8 +136,9 @@ var ITDomination = {
 		this.player = $("#player");
 		this.enemy = $("#enemy");
 		this.front_field = $("#player .front-fields");
-		this.back_field = $("#player .back-fields");
+		this.back_field = $("#player .back-fields-live");
 		this.enemy_front_field = $("#enemy .front-fields");
+		this.enemy_back_field = $("#enemy .back-fields-live");
 		this.market = $("#market");
 		this.deck = $("#player .deck-field");
 		this.log = $("#log");
@@ -184,7 +191,7 @@ var ITDomination = {
 			ITDomination.focused = $(this);
 			e.stopPropagation();
 		});
-
+	
 		// chat 
 		$("#game-chat").submit(function(){
 			if(ITDomination.chat_content.val().length > 0){
@@ -222,6 +229,13 @@ var ITDomination = {
 			ITDomination.focused = null;
 		});
 		
+		//hide card info when user push ESC key
+		$(window).keydown(function(e){
+			if(e.keyCode == 27){
+				ITDomination.card_info.hide();
+				ITDomination.focused = null;
+			}
+		});
 		$("#turn-end").click(function(){
 			socket.emit("turnEndRequest");
 		});
