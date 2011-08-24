@@ -115,6 +115,36 @@ var SocketHandlers = [
 
 		}
 	}
+	,{
+		event : "effect"
+		,handler : function(name, playerId, cardId){
+			console.log(name);
+			console.log(playerId);
+			console.log(cardId);
+			var ele;
+			if(playerId == "market"){
+				if($("img", ITDomination.market).length ==0){ //시장이 비었으면 
+					ele=null;
+				}
+				else
+					ele = $("div", ITDomination.market);
+			}
+			else
+				ele = $("img[playerIndex="+playerId+"][index="+cardId+"]").parent();
+			if(ele==null)return;
+			switch(name){
+				case "bounce" :
+					ele.effect("bounce",{distance : 10},100);
+					break;
+				case "shake" :
+					ele.effect("shake",{distance : 2},30);
+					break;
+				case "explode" :
+					ele.effect("explode",{pieces:49},500);
+					break;
+			}
+		}
+	}
 ];
 
 var ITDomination = {
