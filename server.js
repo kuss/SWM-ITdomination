@@ -38,6 +38,7 @@ var games = {};
 
 initServer();
 Io.sockets.on('connection', function(socket){
+	
 	user = new User({
 		id : socket.id
 		,name : "test"
