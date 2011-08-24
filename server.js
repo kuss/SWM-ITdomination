@@ -9,12 +9,14 @@ var User = require('./lib/user');
 var Player = require('./lib/player');
 var ProtoCard = require('./lib/protocard');
 var Card = require('./lib/card');
+var Lobby = require('./lib/lobby');
 
 function initServer(){
 	//add id to all protocards
 	for(var i in ProtoCard){
 		ProtoCard[i].id = i;
 	}
+	lobby = new Lobby();
 }
 
 App.configure(function(){
@@ -35,10 +37,11 @@ App.listen(80);
 
 var users = {};
 var games = {};
+var lobby;
 
 initServer();
-Io.sockets.on('connection', function(socket){
-	
+
+Io.sockets.on('connection', function(socket){	
 	user = new User({
 		id : socket.id
 		,name : "test"
