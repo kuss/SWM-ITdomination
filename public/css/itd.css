@@ -241,7 +241,9 @@ width:20%; float:right
 	padding:5px 15px 5px 15px;
 }
 
-#card-info h1 { text-align:center; font-size : 1.5em; font-weight:bold; padding:0px 0px 20px 0px;}
+#card-info h1 { text-align:center; font-size : 1.5em; font-weight:bold; padding:0px 0px 0px 0px;}
+#card-info .card-info-type { text-align:right; font-size : 0.9em; font-weight:bold; padding : 0px 0px 20px 0px; font-family : "Helvetica";}
+
 #card-info table { margin:auto;}
 #card-info td { width:30px; text-align:center; padding-bottom : 5px;}
 #card-info .card-info-key { width: 50px; text-align:center;}

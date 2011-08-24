@@ -271,15 +271,36 @@ var ITDomination = {
 		}
 	}
 	,cardtoInfo : function(card){
-		return '<h1 class"card-info-name">'+card.proto.name+'</h1>\
-		<table>\
-		<tr><td class="card-info-key">공격력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.atk+'</span> ('+card.proto.atk+')</td></tr>\
-		<tr><td class="card-info-key">체력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.vit+'</span> / '+card.proto.vit+'</td></tr>\
-		<tr><td class="card-info-key">점유력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.occ+'</span> ('+card.proto.occ+')</td></tr>\
-		<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
-		</table>\
-		<div class="card-info-effect-header">효과</div>\
-		<div class="card-info-effect">'+card.proto.text+'</div>';
+		if(card.proto.type == "product"){
+			return '<h1 class"card-info-name">'+card.proto.name+'</h1>\
+			<h2 class="card-info-type">Product</h2>\
+			<table>\
+			<tr><td class="card-info-key">공격력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.atk+'</span> ('+card.proto.atk+')</td></tr>\
+			<tr><td class="card-info-key">체력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.vit+'</span> / '+card.proto.vit+'</td></tr>\
+			<tr><td class="card-info-key">점유력</td><td>:</td><td class="card-info-value"><span class="hl">'+card.occ+'</span> ('+card.proto.occ+')</td></tr>\
+			<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
+			</table>\
+			<div class="card-info-effect-header">효과</div>\
+			<div class="card-info-effect">'+card.proto.text+'</div>';
+		}
+		else if(card.proto.type == "skill"){
+			return '<h1 class"card-info-name">'+card.proto.name+'</h1>\
+			<h2 class="card-info-type">Tech</h2>\
+			<table>\
+			<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
+			</table>\
+			<div class="card-info-effect-header">효과</div>\
+			<div class="card-info-effect">'+card.proto.text+'</div>';
+		}
+		else if(card.proto.type == "tactic"){
+			return '<h1 class"card-info-name">'+card.proto.name+'</h1>\
+				<h2 class="card-info-type">Tactic</h2>\
+				<table>\
+				<tr><td class="card-info-key">비용</td><td>:</td><td class="card-info-value"><span class="hl">'+card.proto.cost+'</span></td></tr>\
+				</table>\
+				<div class="card-info-effect-header">효과</div>\
+				<div class="card-info-effect">'+card.proto.text+'</div>';
+		}
 	}
 	,addLog : function(text){
 		ITDomination.log.append("<li>"+text+"</li>");
