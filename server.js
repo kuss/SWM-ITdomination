@@ -59,10 +59,9 @@ Io.sockets.on('connection', function(socket){
 		for(var i in users){
 			var newPlayer = new Player(users[i]);
 			
-			newPlayer.deck = [new Card(ProtoCard[0]), new Card(ProtoCard[0]), new Card(ProtoCard[0]), new Card(ProtoCard[1]), new Card(ProtoCard[1])
+			newPlayer.deck = [new Card(ProtoCard[0]), new Card(ProtoCard[0]), new Card(ProtoCard[2]), new Card(ProtoCard[1]), new Card(ProtoCard[1])
 			]; //TODO : 테스트를 위한 덱 설정이므로 지울것 
 		
-			console.log(newPlayer.deck[0]);
 			players.push(newPlayer);
 		}
 
