@@ -1,6 +1,7 @@
-html,body { 
-/*	height:100%;
-	min-height:100%;*/
+
+
+body {
+	font-family : "Malgun Gothic";
 }
 
 #wrapper {
@@ -59,15 +60,32 @@ html,body {
 
 
 #card-info {
-	float:right;
-	margin-bottom:20px;
-	padding:10px;
+	display:none;
 	width:500px;
-	height:100px;
-	clear:right;
-	background:yellow;
+	height:320px;
+	background:black;
+	position:absolute;
+	top:25%;
+	margin : auto;
+	left:0;
+	right:0;
 }
 
+#card-info-image {
+	background:white;
+	height:280px;
+	width:200px;
+	margin:20px;
+	float:left;
+}
+
+#card-info-text{
+	color:white;
+	float:right;
+	width:200px;
+	height:280px;
+	margin:20px;
+}
 
 #hand {
 	float:right;
