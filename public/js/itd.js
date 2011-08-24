@@ -102,6 +102,7 @@ var ITDomination = {
 		this.card_info = $("#card-info");
 		this.card_info_image = $("#card-info-image");
 		this.card_info_text = $("#card-info-text");
+		this.game_log = $("#game-log");
 		this.focused = null;
 		this.data = {0 : {}, 1 : {}};
 		this.chat_content = $("#game-chat-content");
@@ -217,6 +218,7 @@ var ITDomination = {
 	}
 	,addLog : function(text){
 		ITDomination.log.append("<li>"+text+"</li>");
+		ITDomination.game_log.prop('scrollTop', ITDomination.game_log.prop("scrollHeight"));
 	}
 };
 
