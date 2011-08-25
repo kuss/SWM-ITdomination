@@ -43,6 +43,7 @@ initServer();
 
 Io.sockets.on('connection', function(socket){
 	socket.on("name", function(name){
+		console.log(socket);
 		user = new User({
 			id : socket.id
 			,name : "test"
