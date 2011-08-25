@@ -41,33 +41,33 @@ var lobby;
 
 initServer();
 
-Io.sockets.on('connection', function(socket){	
-	user = new User({
-		id : socket.id
-		,name : "test"
-		,send : function(name,a,b,c){
-			socket.emit(name,a,b,c);
-		}
-		,on : function(name, func){
-			socket.on(name, func);
-		}
-		,removeListener : function(name, func) {
-			socket.removeListener(name, func);
-		}
-	});	
+Io.sockets.on('connection', function(socket){
+	socket.on("name", function(name){
+		user = new User({
+			id : socket.id
+			,name : "test"
+			,send : function(name,a,b,c){
+				socket.emit(name,a,b,c);
+			}
+			,on : function(name, func){
+				socket.on(name, func);
+			}
+			,removeListener : function(name, func) {
+				socket.removeListener(name, func);
+			}
+		});	
 
-	users[socket.id] = user;
-	user.send("welcome"); //socket server connection success
+		users[socket.id] = user;
+		user.send("welcome"); //socket server connection success
 	
-	lobby.initLobby(user);
+		lobby.initLobby(user);
 
 
-	socket.on('disconnect',function(){
-		lobby.removeUser(users[socket.id]);
-		delete users[socket.id];
-
+		socket.on('disconnect',function(){
+			lobby.removeUser(users[socket.id]);
+			delete users[socket.id];
+		});
 	});
-
 }); 
 
 
