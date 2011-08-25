@@ -153,6 +153,12 @@ var SocketHandlers = [
 			$("#lobby-image img").attr("src",lo.image);
 		}
 	}
+	,{
+		event : "lobbyLog"
+		,handler : function(text){
+			ITDomination.lobbyLog(text);
+		}
+	}
 ];
 
 var ITDomination = {
@@ -198,6 +204,7 @@ var ITDomination = {
 		this.lobby_screen = $("#lobby-screen");
 		this.name_screen = $("#name-screen");	
 
+		this.lobby_log = $("#lobby-log");
 		//add view handlers
 
 		var socket = this.socket;
@@ -285,6 +292,15 @@ var ITDomination = {
 		
 		$("#move-location").click(function(){
 			socket.emit("moveLocationRequest");
+		});
+		
+		$("#lobby-chat-form").submit(function(){
+			var content = $("#lobby-chat-content").val();
+			if(content.length > 0){
+				socket.emit("lobbyChat",content);
+				$("#lobby-chat-content").val('').focus();
+			}
+			return false;
 		});
 
 		/* view event handler end */
@@ -378,6 +394,10 @@ var ITDomination = {
 			ITDomination.log.append("<li>"+text+"</li>");
 		}
 		ITDomination.game_log.prop('scrollTop', ITDomination.game_log.prop("scrollHeight"));
+	}
+	,lobbyLog : function(text){
+		ITDomination.lobby_log.append("<li>"+text+"</li>");
+		ITDomination.lobby_log.prop('scrollTop', ITDomination.lobby_log.prop("scrollHeight"));
 	}
 	,showName : function(){
 		ITDomination.game_screen.hide();
