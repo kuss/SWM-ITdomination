@@ -9,6 +9,7 @@ var SocketHandlers = [
 		event : "gameStart"
 		,handler : function(){
 			ITDomination.showGame();
+			ITDomination.clear(ITDomination.game_log);
 			ITDomination.addLog("게임이 시작되었습니다.");
 		}
 	}
@@ -96,13 +97,15 @@ var SocketHandlers = [
 				color = Math.ceil(255 * (1- color));
 				ITDomination.market.children().append($("<div>").addClass("field-text-wrapper").css("color","rgb("+color+","+color+","+color+")").text(screen.game.market.card.vit));
 			}
+			else
+				ITDomination.clear(ITDomination.market);
 
 			//set tomb
 			if(screen.player.tombCount > 0){
 				ITDomination.tomb.addClass("back-card").html(screen.player.tombCount);
 			}
 			else
-				ITDomination.tomb.removeClass("back-card");
+				ITDomination.tomb.removeClass("back-card").html("");
 
 			//set player occ
 			var enemy_occ = ITDomination.maxOcc - screen.player.occ;
@@ -194,7 +197,7 @@ var ITDomination = {
 		this.card_info_image = $("#card-info-image");
 		this.card_info_text = $("#card-info-text");
 		this.card_info_action = $("#card-info-action");
-		this.game_log = $("#game-log");
+		this.game_log = $("#game-log ul");
 		this.focused = null;
 		this.data = {0 : {}, 1 : {}};
 		this.chat_content = $("#game-chat-content");
@@ -396,7 +399,7 @@ var ITDomination = {
 		else{
 			ITDomination.log.append("<li>"+text+"</li>");
 		}
-		ITDomination.game_log.prop('scrollTop', ITDomination.game_log.prop("scrollHeight"));
+		ITDomination.game_log.parent().prop('scrollTop', ITDomination.game_log.prop("scrollHeight"));
 	}
 	,lobbyLog : function(text){
 		ITDomination.lobby_log.append("<li>"+text+"</li>");
@@ -408,12 +411,11 @@ var ITDomination = {
 		ITDomination.name_screen.show();	
 	}
 	,showLobby : function(){
-		ITDomination.game_screen.hide();
+			ITDomination.game_screen.hide();
 		ITDomination.name_screen.hide();
 		ITDomination.lobby_screen.show();
 	}
 	,showGame : function(){
-		ITDomination.clear(ITDomination.game_log);
 		ITDomination.name_screen.hide();
 		ITDomination.lobby_screen.hide();
 		ITDomination.game_screen.show();
