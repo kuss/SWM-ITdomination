@@ -8,6 +8,7 @@ var SocketHandlers = [
 	,{
 		event : "gameStart"
 		,handler : function(){
+			ITDomination.showGame();
 			ITDomination.addLog("게임이 시작되었습니다.");
 		}
 	}
@@ -145,6 +146,12 @@ var SocketHandlers = [
 			}
 		}
 	}
+	,{
+		event : "setLocation"
+		,handler : function(lo){
+			$("#location").html("현재 위치는 "+lo.name+"입니다");
+		}
+	}
 ];
 
 var ITDomination = {
@@ -188,7 +195,7 @@ var ITDomination = {
 		
 		this.game_screen = $("#game-screen");
 		this.lobby_screen = $("#lobby-screen");
-		this.name_scren = $("#name-screen");	
+		this.name_screen = $("#name-screen");	
 
 		//add view handlers
 
@@ -274,6 +281,11 @@ var ITDomination = {
 		$("#turn-end").click(function(){
 			socket.emit("turnEndRequest");
 		});
+		
+		$("#move-location").click(function(){
+			socket.emit("moveLocationRequest");
+		});
+
 		/* view event handler end */
 
 		/* screen setting */
