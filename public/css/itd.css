@@ -309,7 +309,7 @@ width:20%; float:right
 #lobby-image img { width:640px; height:480px;}
 
 #lobby-user { float:right; overflow-y : scroll; width:250px; height : 200px; padding:5px;}
-#lobby-log { float:right; overflow-y : scroll; width:250px; height : 220px; padding:5px; margin-top:10px;}
+#lobby-log { float:right; overflow-y : scroll; width:250px; height : 420px; padding:5px; margin-top:10px;}
 #lobby-chat-form { float:right; width:260px; margin-top:0px;}
 #lobby-chat-content { width:65%; float:left;}
 #lobby-chat-submit{width:30%; float:right;}
