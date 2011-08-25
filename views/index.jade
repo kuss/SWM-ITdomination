@@ -9,66 +9,65 @@ html
 		script(type="text/javascript", src="/js/itd.js")
 	body 
 		#wrapper
-			#left
-				#enemy.side
-					.back-fields
-						.deck-field.field-wrapper
-						.back-fields-live
-							.back-field.field-wrapper
-							.back-field.field-wrapper
-							.back-field.field-wrapper
-						.tomb-field.field-wrapper
-					.front-fields
+			#name-screen
+			#lobby-screen
+			#game-screen
+				#left
+					#enemy.side
+						.back-fields
+							.deck-field.field-wrapper
+							.back-fields-live
+								.back-field.field-wrapper
+								.back-field.field-wrapper
+								.back-field.field-wrapper
+							.tomb-field.field-wrapper
+						.front-fields
+							.front-field.field-wrapper
+							.front-field.field-wrapper
+							.front-field.field-wrapper
+					#market 
+						.field-wrapper
+							.field-text-wrapper
+					#player.side
+						.front-fields
+							.front-field.field-wrapper
+							.front-field.field-wrapper
 						.front-field.field-wrapper
-						.front-field.field-wrapper
-						.front-field.field-wrapper
-				#market 
-					.field-wrapper
-						.field-text-wrapper
-				#player.side
-					.front-fields
-						.front-field.field-wrapper
-						.front-field.field-wrapper
-						.front-field.field-wrapper
-					.back-fields
-						.tomb-field.field-wrapper
-						.back-fields-live
-							.back-field.field-wrapper
-							.back-field.field-wrapper
-							.back-field.field-wrapper
-						.deck-field.field-wrapper
-			#right
-				#game-info
-					#game-occ
-						#game-occ-enemy Enemy
-							#game-occ-enemy-value 50
-						#game-occ-player You
-							#game-occ-player-value 50
-						#game-occ-bar-wrapper
-							#game-occ-bar-background
-								#game-occ-bar
-					#game-money 100000
-					#game-launch \\ 100<br />
-						span.launch-text per each launching
-							
-				#game-log
-					ul#log
-				form#game-chat
-					input(type="text", id="game-chat-content")
-					button#game-chat-submit(type="submit") Submit
-				button#turn-end 턴종료 
-			#hand-wrapper
-				#hand-background
-				#hand
-			button#hand-toggle Toggle Hand
-			
-			#intro.full-screen intro
-			#card-info 
-				#card-info-image
-				#card-info-text
-				#card-info-action
-				#card-info-background
-	
-
-
-
+						.back-fields
+							.tomb-field.field-wrapper
+							.back-fields-live
+								.back-field.field-wrapper
+								.back-field.field-wrapper
+								.back-field.field-wrapper
+							.deck-field.field-wrapper
+				#right
+					#game-info
+						#game-occ
+							#game-occ-enemy Enemy
+								#game-occ-enemy-value 50
+							#game-occ-player You
+								#game-occ-player-value 50
+							#game-occ-bar-wrapper
+								#game-occ-bar-background
+									#game-occ-bar
+						#game-money 100000
+						#game-launch \\ 100<br />
+							span.launch-text per each launching
+								
+					#game-log
+						ul#log
+					form#game-chat
+						input(type="text", id="game-chat-content")
+						button#game-chat-submit(type="submit") Submit
+					button#turn-end 턴종료 
+				#hand-wrapper
+					#hand-background
+					#hand
+				button#hand-toggle Toggle Hand
+				
+				#intro.full-screen intro
+				#card-info 
+					#card-info-image
+					#card-info-text
+					#card-info-action
+					#card-info-background

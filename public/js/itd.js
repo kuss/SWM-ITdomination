@@ -185,6 +185,11 @@ var ITDomination = {
 		this.occ_player = $("#game-occ-player-value");
 		this.occ_bar =$("#game-occ-bar");
 		this.money = $("#game-money");
+		
+		this.game_screen = $("#game-screen");
+		this.lobby_screen = $("#lobby-screen");
+		this.name_scren = $("#name-screen");	
+
 		//add view handlers
 
 		var socket = this.socket;
@@ -269,6 +274,12 @@ var ITDomination = {
 		$("#turn-end").click(function(){
 			socket.emit("turnEndRequest");
 		});
+		/* view event handler end */
+
+		/* screen setting */
+		/* for test */
+		socket.emit("name", "TESTUSER");
+		this.showLobby();
 	}
 	,intro : function(){ //show intro 
 		$("#intro").show();
@@ -354,6 +365,21 @@ var ITDomination = {
 			ITDomination.log.append("<li>"+text+"</li>");
 		}
 		ITDomination.game_log.prop('scrollTop', ITDomination.game_log.prop("scrollHeight"));
+	}
+	,showName : function(){
+		ITDomination.game_screen.hide();
+		ITDomination.lobby_screen.hide();
+		ITDomination.name_screen.show();	
+	}
+	,showLobby : function(){
+		ITDomination.game_screen.hide();
+		ITDomination.name_screen.hide();
+		ITDomination.lobby_screen.show();
+	}
+	,showGame : function(){
+		ITDomination.name_screen.hide();
+		ITDomination.lobby_screen.hide();
+		ITDomination.game_screen.show();
 	}
 };
 
