@@ -113,7 +113,7 @@ var SocketHandlers = [
 			//set player money
 			ITDomination.money.html("\\ "+screen.player.money + "<br /><span class=\"money-per-turn\">\\ "+screen.player.moneyPerTurn + " per turn</span>");
 			//set game info
-
+			ITDomination.launch.html("\\ " + screen.player.attackCost +"<br /><span class=\"launch-text\">per each launching</span>");
 		}
 	}
 	,{
@@ -201,7 +201,7 @@ var ITDomination = {
 		this.occ_player = $("#game-occ-player-value");
 		this.occ_bar =$("#game-occ-bar");
 		this.money = $("#game-money");
-		
+		this.launch = $("#game-launch");
 		this.game_screen = $("#game-screen");
 		this.lobby_screen = $("#lobby-screen");
 		this.name_screen = $("#name-screen");	
