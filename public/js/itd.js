@@ -149,7 +149,7 @@ var SocketHandlers = [
 	,{
 		event : "setLocation"
 		,handler : function(lo){
-			$("#location").html("현재 위치는 "+lo.name+"입니다");
+			$("#location").html("현재 위치는 "+lo.name+" 입니다");
 			$("#lobby-image img").attr("src",lo.image);
 			$("#lobby-chat-content").focus();
 			ITDomination.clear($("#lobby-log")); //log clear
