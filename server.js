@@ -61,9 +61,6 @@ Io.sockets.on('connection', function(socket){
 	
 	lobby.initLobby(user);
 
-	if(Util.length(users)==2){
-		lobby.addGame(users);
-	}
 
 	socket.on('disconnect',function(){
 		lobby.removeUser(users[socket.id]);
