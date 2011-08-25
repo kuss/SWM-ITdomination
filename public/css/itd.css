@@ -315,3 +315,7 @@ width:20%; float:right
 #lobby-chat-submit{width:30%; float:right;}
 #move-location { margin:10px; padding:15px 250px 15px 250px; font-size : 1.5em;}
 #move-location-wrapper { clear:both; text-align:center;}
+
+#login { width:600px; margin:auto; padding-top:30%;}
+#login-name { width:400px; font-size : 2em;}
+#login-submit {font-size : 2em; margin-left:20px;} 

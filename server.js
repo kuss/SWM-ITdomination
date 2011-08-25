@@ -46,7 +46,7 @@ Io.sockets.on('connection', function(socket){
 		console.log(socket);
 		user = new User({
 			id : socket.id
-			,name : "test"
+			,name : name
 			,send : function(name,a,b,c){
 				socket.emit(name,a,b,c);
 			}
