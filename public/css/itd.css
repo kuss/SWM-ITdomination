@@ -304,11 +304,14 @@ width:20%; float:right
 
 /* Lobby Style */
 
-#location { float:left; width:640px;}
+#location { clear:both; padding:10px; text-align:center; font-size :2em; padding-bottom:20px;}
 #lobby-image { float:left; width:640px; height:480px;}
 #lobby-image img { width:640px; height:480px;}
 
-#lobby-user { float:right; overflow-y : scroll;}
-#lobby-log { float:right; overflow-y : scroll;}
-
-
+#lobby-user { float:right; overflow-y : scroll; width:250px; height : 200px; padding:5px;}
+#lobby-log { float:right; overflow-y : scroll; width:250px; height : 220px; padding:5px; margin-top:10px;}
+#lobby-chat-form { float:right; width:260px; margin-top:0px;}
+#lobby-chat-content { width:65%; float:left;}
+#lobby-chat-submit{width:30%; float:right;}
+#move-location { margin:10px; padding:15px 250px 15px 250px; font-size : 1.5em;}
+#move-location-wrapper { clear:both; text-align:center;}
