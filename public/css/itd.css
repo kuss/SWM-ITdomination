@@ -257,7 +257,7 @@ width:20%; float:right
 #card-info .card-info-value { width: 100px; text-align:center; }
 #card-info .hl { font-weight : bold;}
 #card-info .card-info-effect-header { padding: 5px; font-weight:bold;}
-#card-info .card-info-effect {padding-left:20px; text-indent:1em;}
+#card-info .card-info-effect {padding-left:20px; text-indent:0.5em;}
 
 .full-screen{
 	width:100%;
@@ -301,3 +301,14 @@ width:20%; float:right
 	padding-bottom:10px;
 }
 .sep{padding-top:10px;}
+
+/* Lobby Style */
+
+#location { float:left; width:640px;}
+#lobby-image { float:left; width:640px; height:480px;}
+#lobby-image img { width:640px; height:480px;}
+
+#lobby-user { float:right; overflow-y : scroll;}
+#lobby-log { float:right; overflow-y : scroll;}
+
+
