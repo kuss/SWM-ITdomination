@@ -308,13 +308,22 @@ var ITDomination = {
 			}
 			return false;
 		});
+		
+		$("#login").submit(function(){
+			var name = $("#login-name").val();
+			if(name.length > 0){
+				socket.emit("name",name);
+			}
+			return false;
+		});
 
 		/* view event handler end */
 
 		/* screen setting */
 		/* for test */
-		socket.emit("name", "TESTUSER");
-		this.showLobby();
+//		socket.emit("name", "TESTUSER");
+//		this.showLobby();
+		this.showName();
 	}
 	,intro : function(){ //show intro 
 		$("#intro").show();
@@ -406,6 +415,7 @@ var ITDomination = {
 		ITDomination.lobby_log.prop('scrollTop', ITDomination.lobby_log.prop("scrollHeight"));
 	}
 	,showName : function(){
+		$("#login-name").focus();
 		ITDomination.game_screen.hide();
 		ITDomination.lobby_screen.hide();
 		ITDomination.name_screen.show();	
