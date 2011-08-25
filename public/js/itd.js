@@ -413,6 +413,7 @@ var ITDomination = {
 		ITDomination.lobby_screen.show();
 	}
 	,showGame : function(){
+		ITDomination.clear(ITDomination.game_log);
 		ITDomination.name_screen.hide();
 		ITDomination.lobby_screen.hide();
 		ITDomination.game_screen.show();
