@@ -51,11 +51,21 @@ body {
 #market { 
 	height:150px;
 	width:100px;
-	padding-left : 225px;
+	padding-left : 221px;
 	float:left;
 	clear:left;
 	position:relative;
 	z-index:2;
+}
+#market-bg{
+	background : url(/market-background.jpg);
+	position:absolute;
+	width:232px;
+	height:150px;
+	z-index : -1;
+	top:320px;
+	opacity:0.5;
+	left:160px;
 }
 #market> div { position:absolute; z-index:1;}
 #market>div img {z-index:1;}
@@ -316,6 +326,7 @@ width:20%; float:right
 #move-location { margin:10px; padding:15px 250px 15px 250px; font-size : 1.5em;}
 #move-location-wrapper { clear:both; text-align:center;}
 
-#login { width:600px; margin:auto; padding-top:30%;}
+#login-title { text-align:center; font-size : 5em; padding-top:20%;}
+#login { width:600px; margin:auto; padding-top:10%; text-align:center;}
 #login-name { width:400px; font-size : 2em;}
 #login-submit {font-size : 2em; margin-left:20px;} 

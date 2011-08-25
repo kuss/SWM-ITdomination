@@ -97,8 +97,10 @@ var SocketHandlers = [
 				color = Math.ceil(255 * (1- color));
 				ITDomination.market.children().append($("<div>").addClass("field-text-wrapper").css("color","rgb("+color+","+color+","+color+")").text(screen.game.market.card.vit));
 			}
-			else
+			else{
 				ITDomination.clear(ITDomination.market);
+				ITDomination.market.append($("<div>").addClass("field-wrapper"));
+			}
 
 			//set tomb
 			if(screen.player.tombCount > 0){
